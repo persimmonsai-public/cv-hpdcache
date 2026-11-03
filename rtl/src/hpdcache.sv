@@ -103,6 +103,9 @@ import hpdcache_pkg::*;
     //      Performance events
     output logic                          evt_cache_write_miss_o,
     output logic                          evt_cache_read_miss_o,
+    //      Source ID of the request that raised evt_cache_read_miss_o
+    //      (valid when evt_cache_read_miss_o is set)
+    output hpdcache_req_sid_t             evt_cache_read_miss_sid_o,
     output logic                          evt_cache_dir_unc_err_o,
     output logic                          evt_cache_dir_cor_err_o,
     output logic                          evt_cache_dat_unc_err_o,
@@ -1269,6 +1272,10 @@ import hpdcache_pkg::*;
     assign mem_resp_write_flush = hpdcache_resp_write_sel_id(mem_resp_write_i, 1);
     assign mem_resp_write_uc = hpdcache_resp_write_sel_id(mem_resp_write_i, 2);
     //  }}}
+
+    //  Requester of a read miss: the miss event is raised in stage 2 in the
+    //  same cycle as the MSHR allocation, whose source ID it carries.
+    assign evt_cache_read_miss_sid_o = miss_mshr_alloc_sid;
 
     //  Assertions
     //  {{{

@@ -199,6 +199,7 @@ module hpdcache_wrapper
 
       .evt_cache_write_miss_o(  /* unused */),
       .evt_cache_read_miss_o (  /* unused */),
+      .evt_cache_read_miss_sid_o (  /* unused */),
       .evt_cache_dir_unc_err_o( /* unused */),
       .evt_cache_dir_cor_err_o( /* unused */),
       .evt_cache_dat_unc_err_o( /* unused */),
